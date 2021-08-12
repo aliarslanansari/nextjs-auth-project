@@ -14,13 +14,13 @@ export default NextAuth({
         const client = await dbConnect()
         console.log(credentials)
         const usersCollection = client.db().collection('user')
-        const user = usersCollection.findOne({ email: credentials.email })
+        const user = await usersCollection.findOne({ email: credentials.email })
         if (!user) {
           client.close()
           throw new Error('No user found')
         }
         const isValid = await verifyPassword(
-          credentials.verifyPassword,
+          credentials.password,
           user.password
         )
         if (!isValid) {
