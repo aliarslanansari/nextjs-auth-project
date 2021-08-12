@@ -36,7 +36,7 @@ const handler = async (req, res) => {
       password: hashedPassword,
     })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({
       message: error.message,
     })
